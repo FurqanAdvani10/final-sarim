@@ -6,7 +6,7 @@ import { productValidationSchema } from './ProductSchema'; // Ensure your schema
 
 const { Option } = Select;
 
-const ProductModal = ({ open, onClose, onSubmit, categories, subcategories, vendors }) => {
+const ProductModal = ({ open, onClose, onSubmit, categories, subcategories, vendors }) => { 
   const [selectedCategory, setSelectedCategory] = useState('');
   const [fileList, setFileList] = useState([]);
 
@@ -15,6 +15,7 @@ const ProductModal = ({ open, onClose, onSubmit, categories, subcategories, vend
     setFieldValue('category', value);
     setFieldValue('subCategory', ''); // Clear the subcategory when category changes
   };
+
 
   const handleUploadChange = ({ fileList }) => {
     setFileList(fileList);
@@ -77,7 +78,7 @@ const ProductModal = ({ open, onClose, onSubmit, categories, subcategories, vend
                   >
                     {categories.map((category) => (
                       <Option key={category.key} value={category.key}>
-                        {category.name}
+                        {category.category}
                       </Option>
                     ))}
                   </Select>
@@ -100,10 +101,10 @@ const ProductModal = ({ open, onClose, onSubmit, categories, subcategories, vend
                     onChange={(value) => setFieldValue('subCategory', value)}
                     disabled={!selectedCategory}
                   >
-                    {(subcategories.filter((sc) => sc.categoryId === selectedCategory) || []).map(
+                    {(subcategories.filter((sc) => sc.categoryId === selectedCategory.id) || []).map(
                       (subcategory) => (
                         <Option key={subcategory.key} value={subcategory.key}>
-                          {subcategory.name}
+                          {subcategory.subCategory}
                         </Option>
                       )
                     )}
